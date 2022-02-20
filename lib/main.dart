@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'login_page.dart';
+import 'modules/login_page/index.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,22 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Roboto-Regular',
           colorScheme: ColorScheme(
-              primary: const Color(0xFF00ADA7),
-              primaryVariant: Colors.teal.shade900,
-              secondary: const Color(0xFFF9732A),
-              secondaryVariant: Colors.orange.shade900,
-              surface: Theme.of(context).colorScheme.primary,
-              background: Colors.white,
-              error: Colors.red,
-              onPrimary: Colors.white,
-              onSecondary: Colors.white,
-              onSurface: Colors.white,
-              onBackground: Colors.black,
-              onError: Colors.white,
-              brightness: Brightness.light)),
+            primary: const Color(0xFF00ADA7),
+            primaryVariant: Colors.teal.shade900,
+            secondary: const Color(0xFFF9732A),
+            secondaryVariant: Colors.orange.shade900,
+            surface: Colors.grey.shade300,
+            background: Colors.white,
+            error: Colors.red,
+            onPrimary: Colors.white,
+            onSecondary: Colors.white,
+            onSurface: Colors.black,
+            onBackground: Colors.black,
+            onError: Colors.white,
+            brightness: Brightness.light,
+          )),
       home: const LoginPage(),
     );
   }
