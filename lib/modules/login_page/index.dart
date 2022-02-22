@@ -140,15 +140,18 @@ class LoginPage extends StatelessWidget {
               Radius.circular(textFieldBorderRadius),
             ),
           ),
-          child: TextButton(
-            onPressed: () {
-              _onClickAcessar(context);
-            },
-            child: Text(
-              'Acessar',
-              style: TextStyle(
-                color: kWhite,
-                fontSize: 16,
+          child: ButtonTheme(
+            minWidth: double.infinity,
+            child: MaterialButton(
+              onPressed: () {
+                _onClickAcessar(context);
+              },
+              child: Text(
+                'Acessar',
+                style: TextStyle(
+                  color: kWhite,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
