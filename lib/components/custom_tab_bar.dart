@@ -21,74 +21,36 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isSelectedTab
-        ? AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height: containerHeight,
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(borderRadius),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 0),
-                  blurRadius: 50,
-                  color: kBlack.withOpacity(0.5),
-                )
-              ],
-            ),
-            child: Center(
-              child: Text(
-                tabLabel,
-                style: TextStyle(
-                  decoration: TextDecoration.none,
-                  color: kPrimaryColor.withOpacity(0.6),
-                  fontSize: fontSize,
-                  fontFamily: 'Roboto-Regular',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      height: containerHeight,
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(borderRadius),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 0),
+            blurRadius: 50,
+            color: isSelectedTab
+                ? kBlack.withOpacity(0.5)
+                : kBlack.withOpacity(0.1),
           )
-        : AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height: containerHeight,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 0),
-                  blurRadius: 50,
-                  color: kBlack.withOpacity(0.1),
-                )
-              ],
-            ),
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 10,
-                  sigmaY: 10,
-                ),
-                child: Container(
-                  height: containerHeight,
-                  decoration: BoxDecoration(
-                    color: kWhite.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(borderRadius),
-                  ),
-                  child: Center(
-                    child: Text(
-                      tabLabel,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        color: kBlack.withOpacity(0.6),
-                        fontSize: fontSize,
-                        fontFamily: 'Roboto-Regular',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
+        ],
+      ),
+      child: Center(
+        child: Text(
+          tabLabel,
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: isSelectedTab
+                ? kPrimaryColor.withOpacity(0.6)
+                : kBlack.withOpacity(0.6),
+            fontSize: fontSize,
+            fontFamily: 'Roboto-Regular',
+            fontWeight: isSelectedTab ? FontWeight.bold : FontWeight.w400,
+          ),
+        ),
+      ),
+    );
   }
 }

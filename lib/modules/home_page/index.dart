@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage>
       body: Stack(children: [
         Container(
           height: double.infinity,
-          color: kWhite,
+          color: kBackground,
         ),
         Column(
           children: [

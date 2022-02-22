@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portal_louvor_app/components/constants.dart';
 
 import 'modules/login_page/index.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          scaffoldBackgroundColor: kBackground,
           fontFamily: 'Roboto-Regular',
           colorScheme: ColorScheme(
             primary: const Color(0xFF00ADA7),
