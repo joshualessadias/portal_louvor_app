@@ -28,19 +28,17 @@ class LoginPage extends StatelessWidget {
             width: double.infinity,
             color: kPrimaryColor,
           ),
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Container(
-                height: bottomContainerSize,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
-                  color: kSecondaryColor,
+          Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Container(
+              height: bottomContainerSize,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
+                color: kSecondaryColor,
               ),
             ),
           ),

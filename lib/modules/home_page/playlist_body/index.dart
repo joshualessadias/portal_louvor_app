@@ -34,7 +34,7 @@ class PlaylistBody extends StatelessWidget {
 
   void _onClickAdd(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => CreatePlaylistPage()));
+        .push(MaterialPageRoute(builder: (context) => const CreatePlaylistPage()));
   }
 
   @override

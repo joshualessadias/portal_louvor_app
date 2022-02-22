@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage>
         Column(
           children: [
             SizedBox(
-              height: screenSize.height * 0.18,
+              height: screenSize.height * 0.15,
               child: Stack(
                 children: [
                   Container(
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage>
                       vertical: 16.0,
                       horizontal: 16.0,
                     ),
-                    height: screenSize.height * 0.18 - 27,
+                    height: screenSize.height * 0.15 - 27,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: kPrimaryColor,
