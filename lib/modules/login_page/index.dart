@@ -30,62 +30,76 @@ class LoginPage extends StatelessWidget {
           ),
           Align(
             alignment: FractionalOffset.bottomCenter,
-            child: Container(
-              height: bottomContainerSize,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
-                color: kSecondaryColor,
+            child: SizedBox(
+              height: size.height,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    bottom: 0.0,
+                    child: Container(
+                      height: bottomContainerSize,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
+                        color: kSecondaryColor,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0.0,
+                    right: 0.0,
+                    bottom: 0.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0, vertical: 100.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 100,
+                            child: Image(
+                              image: AssetImage(
+                                  'images/logo_siao_white_minimal.png'),
+                            ),
+                          ),
+                          const SizedBox(height: 80),
+                          Text(
+                            "Ministério de Louvor",
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              color: kWhite,
+                              fontFamily: 'Roboto-Regular',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 32,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 60),
+                          Text(
+                            "Faça login informando e-mail e senha",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              color: kWhite,
+                              fontFamily: 'Roboto-Regular',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(height: 60),
+                          _buildLoginForm(textFieldBorderRadius, context),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          Center(
-            child: ScrollConfiguration(
-              behavior: MyScrollBehavior(),
-              child: ListView(
-                shrinkWrap: true,
-                reverse: true,
-                padding: const EdgeInsets.all(40.0),
-                children: [
-                  const SizedBox(
-                    height: 100,
-                    child: Image(
-                      image: AssetImage('images/logo_siao_white_minimal.png'),
-                    ),
-                  ),
-                  const SizedBox(height: 80),
-                  Text(
-                    "Ministério de Louvor",
-                    style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: kWhite,
-                      fontFamily: 'Roboto-Regular',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 32,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 60),
-                  Text(
-                    "Faça login informando e-mail e senha",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: kWhite,
-                      fontFamily: 'Roboto-Regular',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 60),
-                  _buildLoginForm(textFieldBorderRadius, context)
-                ].reversed.toList(),
-              ),
-            ),
-          )
         ],
       ),
     );
@@ -142,6 +156,7 @@ class LoginPage extends StatelessWidget {
           ),
           child: ButtonTheme(
             minWidth: double.infinity,
+            height: double.infinity,
             child: MaterialButton(
               onPressed: () {
                 _onClickAcessar(context);
