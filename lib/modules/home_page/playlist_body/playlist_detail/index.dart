@@ -29,7 +29,7 @@ class PlaylistDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SongsBody(playlist: playlist),
+      body: SongsBody(songList: playlist.songs),
     );
   }
 }

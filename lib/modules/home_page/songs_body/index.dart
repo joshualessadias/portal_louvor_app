@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:portal_louvor_app/model/playlist.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/index.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/songs_search/index.dart';
 
 class SongsBody extends StatelessWidget {
-  SongsBody({Key? key, this.playlist}) : super(key: key);
+  SongsBody({Key? key, this.songList}) : super(key: key);
 
-  final Playlist? playlist;
+  final List<Song>? songList;
 
   final List<Song> mockSongs = [
     Song(0, 'Lugar Seguro', 'Puresound', 'A', ''),
@@ -36,9 +35,8 @@ class SongsBody extends StatelessWidget {
 
   void _onClickCard(BuildContext context, int songIndex) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SongDetailPage(playlist != null
-            ? playlist!.songs[songIndex]
-            : mockSongs[songIndex])));
+        builder: (context) => SongDetailPage(
+            songList != null ? songList![songIndex] : mockSongs[songIndex])));
   }
 
   @override
@@ -49,13 +47,16 @@ class SongsBody extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(8)),
     );
 
-    mockSongs.sort((a, b) => a.title.compareTo(b.title));
+    if (songList != null) {
+      songList!.sort((a, b) => a.title.compareTo(b.title));
+    } else {
+      mockSongs.sort((a, b) => a.title.compareTo(b.title));
+    }
 
     return Stack(
       children: [
         ListView.builder(
-          itemCount:
-              playlist != null ? playlist!.songs.length : mockSongs.length,
+          itemCount: songList != null ? songList!.length : mockSongs.length,
           itemBuilder: (_, songIndex) => SizedBox(
             height: cardHeight,
             child: Card(
@@ -70,8 +71,8 @@ class SongsBody extends StatelessWidget {
                 },
                 child: ListTile(
                   title: Text(
-                    playlist != null
-                        ? playlist!.songs[songIndex].title
+                    songList != null
+                        ? songList![songIndex].title
                         : mockSongs[songIndex].title,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface,
@@ -82,8 +83,8 @@ class SongsBody extends StatelessWidget {
                       children: <TextSpan>[
                         TextSpan(
                           text: 'Autor: ' +
-                              (playlist != null
-                                  ? playlist!.songs[songIndex].author
+                              (songList != null
+                                  ? songList![songIndex].author
                                   : mockSongs[songIndex].author),
                           style: const TextStyle(
                             color: Colors.black54,
@@ -97,8 +98,8 @@ class SongsBody extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: playlist != null
-                              ? playlist!.songs[songIndex].tone
+                          text: songList != null
+                              ? songList![songIndex].tone
                               : mockSongs[songIndex].tone,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary,
@@ -114,7 +115,7 @@ class SongsBody extends StatelessWidget {
             ),
           ),
         ),
-        (playlist == null
+        (songList == null
             ? Align(
                 alignment: FractionalOffset.bottomRight,
                 child: Padding(

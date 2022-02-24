@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/model/playlist.dart';
-import 'package:portal_louvor_app/modules/home_page/playlist_body/create_playlist/index.dart';
 import 'package:portal_louvor_app/modules/home_page/playlist_body/playlist_detail/index.dart';
 
 class PlaylistBody extends StatelessWidget {
@@ -30,11 +29,6 @@ class PlaylistBody extends StatelessWidget {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
             PlaylistDetailPage(mockPlaylists[playlistIndex])));
-  }
-
-  void _onClickAdd(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const CreatePlaylistPage()));
   }
 
   @override
@@ -73,19 +67,6 @@ class PlaylistBody extends StatelessWidget {
             ),
           ),
           itemCount: mockPlaylists.length,
-        ),
-        Align(
-          alignment: FractionalOffset.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                _onClickAdd(context);
-              },
-              tooltip: 'Adicionar Playlist',
-              child: const Icon(Icons.add_rounded),
-            ),
-          ),
         ),
       ],
     );
