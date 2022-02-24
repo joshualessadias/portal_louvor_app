@@ -18,6 +18,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double bottomContainerSize = size.height * 0.33;
+    double spacerSize = size.height * 0.1;
+    double biggerSpacerSize = size.height * 0.13;
+    double textFieldHeight = 50.0;
+    double textFieldSpacerHeight = size.height * 0.012;
+    double bottomMargin = size.height * 0.155;
     double textFieldBorderRadius = 8;
 
     return Scaffold(
@@ -55,8 +60,7 @@ class LoginPage extends StatelessWidget {
                     right: 0.0,
                     bottom: 0.0,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40.0, vertical: 100.0),
+                      padding: const EdgeInsets.only(left: 40.0, right: 40.0),
                       child: Column(
                         children: [
                           const SizedBox(
@@ -66,7 +70,7 @@ class LoginPage extends StatelessWidget {
                                   'images/logo_siao_white_minimal.png'),
                             ),
                           ),
-                          const SizedBox(height: 80),
+                          SizedBox(height: biggerSpacerSize),
                           Text(
                             "Ministério de Louvor",
                             style: TextStyle(
@@ -78,7 +82,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 60),
+                          SizedBox(height: spacerSize),
                           Text(
                             "Faça login informando e-mail e senha",
                             textAlign: TextAlign.center,
@@ -90,8 +94,10 @@ class LoginPage extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          const SizedBox(height: 60),
-                          _buildLoginForm(textFieldBorderRadius, context),
+                          SizedBox(height: spacerSize),
+                          _buildLoginForm(textFieldBorderRadius, context,
+                              textFieldHeight, textFieldSpacerHeight),
+                          SizedBox(height: bottomMargin),
                         ],
                       ),
                     ),
@@ -105,13 +111,13 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Column _buildLoginForm(double textFieldBorderRadius, BuildContext context) {
+  Column _buildLoginForm(double textFieldBorderRadius, BuildContext context,
+      double textFieldHeight, double textFieldSpacerHeight) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
           alignment: Alignment.center,
-          height: 54,
+          height: textFieldHeight,
           decoration: BoxDecoration(
             color: kWhite,
             borderRadius: BorderRadius.all(
@@ -126,10 +132,10 @@ class LoginPage extends StatelessWidget {
                 prefixIcon: Icon(Icons.email_rounded)),
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: textFieldSpacerHeight),
         Container(
           alignment: Alignment.center,
-          height: 54,
+          height: textFieldHeight,
           decoration: BoxDecoration(
             color: kWhite,
             borderRadius: BorderRadius.all(
@@ -144,10 +150,10 @@ class LoginPage extends StatelessWidget {
                 prefixIcon: Icon(Icons.lock_rounded)),
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: textFieldSpacerHeight),
         Container(
           alignment: Alignment.center,
-          height: 54,
+          height: textFieldHeight,
           decoration: BoxDecoration(
             color: kPrimaryColor,
             borderRadius: BorderRadius.all(
