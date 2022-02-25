@@ -90,6 +90,7 @@ class _SongSearchPageState extends State<SongSearchPage> {
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
           border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(Radius.circular(35)),
           ),
           filled: true,

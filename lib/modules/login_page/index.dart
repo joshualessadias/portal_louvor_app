@@ -26,6 +26,7 @@ class LoginPage extends StatelessWidget {
     double textFieldBorderRadius = 8;
 
     return Scaffold(
+      backgroundColor: kSecondaryColor,
       body: Stack(
         children: [
           Container(
@@ -35,74 +36,81 @@ class LoginPage extends StatelessWidget {
           ),
           Align(
             alignment: FractionalOffset.bottomCenter,
-            child: SizedBox(
-              height: size.height,
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 0.0,
-                    right: 0.0,
-                    bottom: 0.0,
-                    child: Container(
-                      height: bottomContainerSize,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
+            child: ScrollConfiguration(
+              behavior: MyScrollBehavior(),
+              child: SingleChildScrollView(
+                reverse: true,
+                child: SizedBox(
+                  height: size.height,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0.0,
+                        right: 0.0,
+                        bottom: 0.0,
+                        child: Container(
+                          height: bottomContainerSize,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                            color: kSecondaryColor,
+                          ),
                         ),
-                        color: kSecondaryColor,
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0.0,
-                    right: 0.0,
-                    bottom: 0.0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 40.0, right: 40.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 100,
-                            child: Image(
-                              image: AssetImage(
-                                  'images/logo_siao_white_minimal.png'),
-                            ),
+                      Positioned(
+                        left: 0.0,
+                        right: 0.0,
+                        bottom: 0.0,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 40.0, right: 40.0),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 100,
+                                child: Image(
+                                  image: AssetImage(
+                                      'images/logo_siao_white_minimal.png'),
+                                ),
+                              ),
+                              SizedBox(height: biggerSpacerSize),
+                              Text(
+                                "Ministério de Louvor",
+                                style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  color: kWhite,
+                                  fontFamily: 'Roboto-Regular',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 32,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: spacerSize),
+                              Text(
+                                "Faça login informando e-mail e senha",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  color: kWhite,
+                                  fontFamily: 'Roboto-Regular',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(height: spacerSize),
+                              _buildLoginForm(textFieldBorderRadius, context,
+                                  textFieldHeight, textFieldSpacerHeight),
+                              SizedBox(height: bottomMargin),
+                            ],
                           ),
-                          SizedBox(height: biggerSpacerSize),
-                          Text(
-                            "Ministério de Louvor",
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              color: kWhite,
-                              fontFamily: 'Roboto-Regular',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 32,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: spacerSize),
-                          Text(
-                            "Faça login informando e-mail e senha",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              decoration: TextDecoration.none,
-                              color: kWhite,
-                              fontFamily: 'Roboto-Regular',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
-                          ),
-                          SizedBox(height: spacerSize),
-                          _buildLoginForm(textFieldBorderRadius, context,
-                              textFieldHeight, textFieldSpacerHeight),
-                          SizedBox(height: bottomMargin),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -115,39 +123,38 @@ class LoginPage extends StatelessWidget {
       double textFieldHeight, double textFieldSpacerHeight) {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.center,
+        SizedBox(
           height: textFieldHeight,
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.all(
-              Radius.circular(textFieldBorderRadius),
-            ),
-          ),
-          child: const TextField(
+          child: TextField(
+            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
                 hintText: 'E-mail',
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                prefixIcon: Icon(Icons.email_rounded)),
+                filled: true,
+                fillColor: kWhite,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(textFieldBorderRadius)),
+                ),
+                prefixIcon: const Icon(Icons.email_rounded)),
           ),
         ),
         SizedBox(height: textFieldSpacerHeight),
-        Container(
-          alignment: Alignment.center,
+        SizedBox(
           height: textFieldHeight,
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.all(
-              Radius.circular(textFieldBorderRadius),
-            ),
-          ),
-          child: const TextField(
+          child: TextField(
+            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
-                hintText: 'Senha',
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                prefixIcon: Icon(Icons.lock_rounded)),
+              hintText: 'Senha',
+              filled: true,
+              fillColor: kWhite,
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius:
+                    BorderRadius.all(Radius.circular(textFieldBorderRadius)),
+              ),
+              prefixIcon: const Icon(Icons.lock_rounded),
+            ),
           ),
         ),
         SizedBox(height: textFieldSpacerHeight),
