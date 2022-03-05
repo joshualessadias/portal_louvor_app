@@ -3,30 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/index.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/songs_search/index.dart';
+import 'package:portal_louvor_app/components/mock_songs.dart';
 
 class SongsBody extends StatelessWidget {
   SongsBody({Key? key, this.songList}) : super(key: key);
 
-  final List<Song>? songList;
+  List<Song>? songList;
 
-  final List<Song> mockSongs = [
-    Song(0, 'Lugar Seguro', 'Puresound', 'A', ''),
-    Song(1, 'Persevere', 'Puresound', 'B', ''),
-    Song(2, 'Por onde eu for', 'Puresound', 'C', ''),
-    Song(3, 'Voltar', 'Puresound', 'D', ''),
-    Song(4, 'Voltar', 'Puresound', 'A', ''),
-    Song(5, 'Outubro', 'Puresound', 'B', ''),
-    Song(6, 'Voltar', 'Puresound', 'C', ''),
-    Song(7, 'Amor e Verdade', 'Puresound', 'D', ''),
-    Song(8, 'Voltar', 'Puresound', 'A', ''),
-    Song(9, 'Outubro', 'Puresound', 'B', ''),
-    Song(10, 'Voltar', 'Puresound', 'C', ''),
-    Song(11, 'Além do Horizonte', 'Puresound', 'D', ''),
-    Song(12, 'Voltar', 'Puresound', 'A', ''),
-    Song(13, 'Outubro', 'Puresound', 'B', ''),
-    Song(14, 'Voltar', 'Puresound', 'C', ''),
-    Song(15, 'Paradoxo', 'Puresound', 'D', ''),
-  ];
+  final List<Song> mockSongs = kMockSongs;
 
   void _onClickSearch(BuildContext context) {
     Navigator.of(context)
@@ -42,6 +26,8 @@ class SongsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const cardHeight = 90.0;
+    double titleFontSize = 16.0;
+    double subTitleFontSize = 12.0;
 
     ShapeBorder cardShape = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -75,6 +61,7 @@ class SongsBody extends StatelessWidget {
                         ? songList![songIndex].title
                         : mockSongs[songIndex].title,
                     style: TextStyle(
+                      fontSize: titleFontSize,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
@@ -84,16 +71,18 @@ class SongsBody extends StatelessWidget {
                         TextSpan(
                           text: 'Autor: ' +
                               (songList != null
-                                  ? songList![songIndex].author
-                                  : mockSongs[songIndex].author),
-                          style: const TextStyle(
+                                  ? songList![songIndex].descriptionAuthor
+                                  : mockSongs[songIndex].descriptionAuthor),
+                          style: TextStyle(
+                            fontSize: subTitleFontSize,
                             color: Colors.black54,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const TextSpan(
+                        TextSpan(
                           text: '\nTom: ',
                           style: TextStyle(
+                            fontSize: subTitleFontSize,
                             color: Colors.black54,
                           ),
                         ),
@@ -102,6 +91,7 @@ class SongsBody extends StatelessWidget {
                               ? songList![songIndex].tone
                               : mockSongs[songIndex].tone,
                           style: TextStyle(
+                            fontSize: subTitleFontSize + 1.0,
                             color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),

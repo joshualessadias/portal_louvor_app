@@ -22,10 +22,11 @@ class PlaylistDetailPage extends StatelessWidget {
         title: Text(
           playlist.name,
           maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30.0),
+            bottomLeft: Radius.circular(15.0),
           ),
         ),
       ),

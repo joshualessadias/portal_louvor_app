@@ -30,10 +30,10 @@ class CustomTabBar extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 0),
-            blurRadius: 50,
+            blurRadius: 30,
             color: isSelectedTab
                 ? kBlack.withOpacity(0.5)
-                : kBlack.withOpacity(0.1),
+                : kBlack.withOpacity(0.0),
           )
         ],
       ),
