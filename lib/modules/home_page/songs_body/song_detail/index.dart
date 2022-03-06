@@ -209,13 +209,22 @@ Teu [G]nome v[C]amos [Em7]exalta[D]r
           ),
           FontSizeExpansionWidget(
             onIncreaseFontSize: () {
-              setState(() {
-                _fontSize++;
-              });
+              if (_fontSize < 30.0) {
+                setState(() {
+                  _fontSize++;
+                });
+              }
             },
             onDecreaseFontSize: () {
+              if (_fontSize > 6.0) {
+                setState(() {
+                  _fontSize--;
+                });
+              }
+            },
+            onRestoreFontSize: () {
               setState(() {
-                _fontSize--;
+                _fontSize = 16.0;
               });
             },
           )

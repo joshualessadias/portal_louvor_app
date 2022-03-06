@@ -6,10 +6,12 @@ class FontSizeExpansionWidget extends StatelessWidget {
     Key? key,
     required this.onIncreaseFontSize,
     required this.onDecreaseFontSize,
+    required this.onRestoreFontSize,
   }) : super(key: key);
 
   final VoidCallback? onIncreaseFontSize;
   final VoidCallback? onDecreaseFontSize;
+  final VoidCallback? onRestoreFontSize;
 
   final _buttonStyle = ButtonStyle(
     foregroundColor: MaterialStateProperty.all(kGrey),
@@ -64,7 +66,7 @@ class FontSizeExpansionWidget extends StatelessWidget {
               const SizedBox(width: 8.0),
               Expanded(
                 child: OutlinedButton(
-                  onPressed: onDecreaseFontSize,
+                  onPressed: onRestoreFontSize,
                   style: _buttonStyle,
                   child: Text(
                     'Restaurar tamanho incial',
