@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 class CustomColors {
   static const int _primaryValue = 0xFF00ADA7;

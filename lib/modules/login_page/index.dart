@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 
 import '../../components/my_scroll_behavior.dart';

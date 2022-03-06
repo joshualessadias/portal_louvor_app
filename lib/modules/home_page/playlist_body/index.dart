@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/mock_songs.dart';
 import 'package:portal_louvor_app/model/playlist.dart';

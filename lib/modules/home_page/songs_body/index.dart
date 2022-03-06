@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/index.dart';
@@ -8,7 +7,7 @@ import 'package:portal_louvor_app/components/mock_songs.dart';
 class SongsBody extends StatelessWidget {
   SongsBody({Key? key, this.songList}) : super(key: key);
 
-  List<Song>? songList;
+  final List<Song>? songList;
 
   final List<Song> mockSongs = kMockSongs;
 

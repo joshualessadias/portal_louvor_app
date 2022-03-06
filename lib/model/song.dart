@@ -3,8 +3,8 @@ class Song {
   final String title;
   final int authorId;
   final String descriptionAuthor;
-  final String tone;
-  final String lyrics;
+  String tone;
+  String lyrics;
   final String mp3;
 
   Song({

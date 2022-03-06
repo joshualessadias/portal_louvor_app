@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BottomSongList extends StatelessWidget {
-  const BottomSongList({Key? key}) : super(key: key);
+class BottomAudioList extends StatelessWidget {
+  const BottomAudioList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
