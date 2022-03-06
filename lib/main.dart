@@ -19,9 +19,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto-Regular',
           colorScheme: ColorScheme(
             primary: const Color(0xFF00ADA7),
-            primaryVariant: Colors.teal.shade900,
             secondary: const Color(0xFFF9732A),
-            secondaryVariant: Colors.orange.shade900,
             surface: Colors.grey.shade300,
             background: Colors.white,
             error: Colors.red,

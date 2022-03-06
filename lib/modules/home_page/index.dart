@@ -1,11 +1,13 @@
-import 'dart:ui';
+import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 import 'package:portal_louvor_app/components/custom_tab_bar.dart';
+import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/playlist_body/index.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
+import 'package:portal_louvor_app/services/song_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +21,26 @@ class _HomePageState extends State<HomePage>
   late TabController _tabController;
 
   final RestorableInt tabIndex = RestorableInt(0);
+
+  List<Song> songList = [];
+
+  void _buildSongList(Response response) {
+    Map<String, dynamic> jsonMap = jsonDecode(response.body);
+    List<dynamic> data = jsonMap['data'];
+
+    for (var dataValue in data) {
+      songList.add(Song.fromDynamic(dataValue));
+    }
+  }
+
+  void _getSongList() {
+    findAllSongs().then((response) => {
+          if (response.statusCode == 200)
+            {_buildSongList(response)}
+          else
+            {throw Exception('Failed to load Song List')}
+        });
+  }
 
   @override
   String? get restorationId => 'home_page';
@@ -38,6 +60,8 @@ class _HomePageState extends State<HomePage>
         tabIndex.value = _tabController.index;
       });
     });
+
+    _getSongList();
   }
 
   @override
@@ -54,10 +78,8 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu_rounded),
-          onPressed: () {},
-        ),
+        leading: const SizedBox.shrink(),
+        toolbarHeight: 0.0,
       ),
       body: Stack(children: [
         Container(
@@ -67,7 +89,7 @@ class _HomePageState extends State<HomePage>
         Column(
           children: [
             SizedBox(
-              height: screenSize.height * 0.15,
+              height: screenSize.height * 0.2,
               child: Stack(
                 children: [
                   Container(
@@ -75,7 +97,7 @@ class _HomePageState extends State<HomePage>
                       vertical: 16.0,
                       horizontal: 16.0,
                     ),
-                    height: screenSize.height * 0.15 - 27,
+                    height: screenSize.height * 0.2 - 27,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: kPrimaryColor,
@@ -84,15 +106,30 @@ class _HomePageState extends State<HomePage>
                         bottomRight: Radius.circular(15.0),
                       ),
                     ),
-                    child: Text(
-                      'Olá, Joshua',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        decoration: TextDecoration.none,
-                        color: kWhite,
-                        fontFamily: 'Roboto-Regular',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Ministério de Louvor',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              color: kWhite,
+                              fontFamily: 'Roboto-Regular',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 24,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 45,
+                            child: Image(
+                              image: AssetImage(
+                                  'images/logo_siao_white_minimal.png'),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -132,7 +169,9 @@ class _HomePageState extends State<HomePage>
                 controller: _tabController,
                 children: [
                   PlaylistBody(),
-                  SongsBody(),
+                  SongsBody(
+                    songList: songList,
+                  ),
                 ],
               ),
             )

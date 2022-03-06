@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:portal_louvor_app/model/song.dart';
+import 'package:portal_louvor_app/components/mock_songs.dart';
 import 'package:portal_louvor_app/model/playlist.dart';
 import 'package:portal_louvor_app/modules/home_page/playlist_body/playlist_detail/index.dart';
 
@@ -8,21 +7,8 @@ class PlaylistBody extends StatelessWidget {
   PlaylistBody({Key? key}) : super(key: key);
 
   final List<Playlist> mockPlaylists = [
-    Playlist(0, 'CULTO DOMINGO MATUTINO - 13/02/2022', [
-      Song(0, 'Voltar', 'Puresound', 'A', ''),
-      Song(1, 'Outubro', 'Puresound', 'B', ''),
-      Song(0, 'Voltar', 'Puresound', 'C', ''),
-      Song(0, 'Voltar', 'Puresound', 'D', ''),
-    ]),
-    Playlist(1, 'CULTO DOMINGO NOTURNO - 13/02/2022', [
-      Song(0, 'Voltar', 'Puresound', 'E', ''),
-      Song(1, 'Outubro', 'Puresound', 'F', ''),
-      Song(0, 'Voltar', 'Puresound', 'G', ''),
-      Song(0, 'Voltar', 'Puresound', 'A', ''),
-      Song(0, 'Voltar', 'Puresound', 'B', ''),
-      Song(0, 'Voltar', 'Puresound', 'C', ''),
-      Song(0, 'Voltar', 'Puresound', 'D', ''),
-    ]),
+    Playlist(0, 'Culto Domingo Matutino - 13/02/2022', kMockSongs),
+    Playlist(1, 'Culto Domingo Noturno - 13/02/2022', kMockSongs),
   ];
 
   void _onClickCard(BuildContext context, int playlistIndex) {
@@ -34,6 +20,9 @@ class PlaylistBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const cardHeight = 90.0;
+    double titleFontSize = 16.0;
+    double subTitleFontSize = 12.0;
+
     ShapeBorder cardShape = const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
     );
@@ -57,10 +46,19 @@ class PlaylistBody extends StatelessWidget {
                   title: Text(
                     mockPlaylists[playlistIndex].name,
                     style: TextStyle(
+                      fontSize: titleFontSize,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
-                  subtitle: const Text('Toque para ver todas as informações'),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      text: 'Toque para ver todas as informações',
+                      style: TextStyle(
+                        fontSize: subTitleFontSize,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ),
                   trailing: const Icon(Icons.keyboard_arrow_right_rounded),
                 ),
               ),

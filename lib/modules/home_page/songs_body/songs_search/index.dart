@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
+import 'package:portal_louvor_app/components/mock_songs.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
 
@@ -14,24 +14,7 @@ class SongSearchPage extends StatefulWidget {
 TextEditingController editingController = TextEditingController();
 
 class _SongSearchPageState extends State<SongSearchPage> {
-  final List<Song> _mockSongs = [
-    Song(0, 'Lugar Seguro', 'Puresound', 'A', ''),
-    Song(1, 'Persevere', 'Puresound', 'B', ''),
-    Song(2, 'Por onde eu for', 'Puresound', 'C', ''),
-    Song(3, 'Voltar', 'Puresound', 'D', ''),
-    Song(4, 'Voltar', 'Puresound', 'A', ''),
-    Song(5, 'Outubro', 'Puresound', 'B', ''),
-    Song(6, 'Voltar', 'Puresound', 'C', ''),
-    Song(7, 'Amor e Verdade', 'Puresound', 'D', ''),
-    Song(8, 'Voltar', 'Puresound', 'A', ''),
-    Song(9, 'Outubro', 'Puresound', 'B', ''),
-    Song(10, 'Voltar', 'Puresound', 'C', ''),
-    Song(11, 'Além do Horizonte', 'Puresound', 'D', ''),
-    Song(12, 'Voltar', 'Puresound', 'A', ''),
-    Song(13, 'Outubro', 'Puresound', 'B', ''),
-    Song(14, 'Voltar', 'Puresound', 'C', ''),
-    Song(15, 'Paradoxo', 'Puresound', 'D', ''),
-  ];
+  final List<Song> _mockSongs = kMockSongs;
 
   final List<Song> _songsToShow = <Song>[];
 

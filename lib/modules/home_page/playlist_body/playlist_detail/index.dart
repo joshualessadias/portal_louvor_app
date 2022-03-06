@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/playlist.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
@@ -22,10 +21,11 @@ class PlaylistDetailPage extends StatelessWidget {
         title: Text(
           playlist.name,
           maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30.0),
+            bottomLeft: Radius.circular(15.0),
           ),
         ),
       ),
