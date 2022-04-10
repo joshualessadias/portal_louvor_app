@@ -2,14 +2,14 @@ import 'package:portal_louvor_app/model/song.dart';
 
 List<Song> kMockSongs = [
   Song(
-      id: 0,
-      title: 'Lugar Seguro',
-      authorId: 0,
-      descriptionAuthor: 'PureSound',
-      tone: 'A',
-      mp3: 'teste',
-      lyrics:
-          """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
+    id: 0,
+    title: 'Lugar Seguro',
+    authorId: 0,
+    descriptionAuthor: 'PureSound',
+    tone: 'A',
+    mp3: 'teste',
+    lyrics:
+        """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
 
 
  <strong>G</strong>                   <strong>C</strong>                    <strong>G</strong>                <strong>C</strong>
@@ -124,16 +124,17 @@ Porque a Igreja vem, arrebentando com as portas do inferno
                  <strong>Am</strong>                <strong>Bm</strong>              <strong>Em</strong>
 Com barulho de milagre, levantando um exército de vidas
               <strong>Am</strong>  <strong>D4</strong>  <strong>D</strong>         <strong>Em</strong>     <strong>D/F#</strong>  <strong>G</strong>
-É a Igreja Santa,      aqui perseguida</pre>"""),
+É a Igreja Santa,      aqui perseguida</pre>""",
+  ),
   Song(
-      id: 0,
-      title: 'Lugar Seguro',
-      authorId: 0,
-      descriptionAuthor: 'PureSound',
-      tone: 'A',
-      mp3: 'teste',
-      lyrics:
-          """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
+    id: 0,
+    title: 'Lugar Seguro',
+    authorId: 0,
+    descriptionAuthor: 'PureSound',
+    tone: 'A',
+    mp3: 'teste',
+    lyrics:
+        """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
 
 
  <strong>G</strong>                   <strong>C</strong>                    <strong>G</strong>                <strong>C</strong>
@@ -248,16 +249,17 @@ Porque a Igreja vem, arrebentando com as portas do inferno
                  <strong>Am</strong>                <strong>Bm</strong>              <strong>Em</strong>
 Com barulho de milagre, levantando um exército de vidas
               <strong>Am</strong>  <strong>D4</strong>  <strong>D</strong>         <strong>Em</strong>     <strong>D/F#</strong>  <strong>G</strong>
-É a Igreja Santa,      aqui perseguida</pre>"""),
+É a Igreja Santa,      aqui perseguida</pre>""",
+  ),
   Song(
-      id: 0,
-      title: 'Lugar Seguro',
-      authorId: 0,
-      descriptionAuthor: 'PureSound',
-      tone: 'A',
-      mp3: 'teste',
-      lyrics:
-          """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
+    id: 0,
+    title: 'Lugar Seguro',
+    authorId: 0,
+    descriptionAuthor: 'PureSound',
+    tone: 'A',
+    mp3: 'teste',
+    lyrics:
+        """<pre>Intro: <strong>G</strong>  <strong>C</strong>  <strong>Em</strong>  <strong>C</strong>  <strong>D</strong> <strong>G</strong> <strong>C</strong>
 
 
  <strong>G</strong>                   <strong>C</strong>                    <strong>G</strong>                <strong>C</strong>
@@ -372,5 +374,6 @@ Porque a Igreja vem, arrebentando com as portas do inferno
                  <strong>Am</strong>                <strong>Bm</strong>              <strong>Em</strong>
 Com barulho de milagre, levantando um exército de vidas
               <strong>Am</strong>  <strong>D4</strong>  <strong>D</strong>         <strong>Em</strong>     <strong>D/F#</strong>  <strong>G</strong>
-É a Igreja Santa,      aqui perseguida</pre>"""),
+É a Igreja Santa,      aqui perseguida</pre>""",
+  ),
 ];

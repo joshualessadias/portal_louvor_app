@@ -7,3 +7,5 @@ Color kBlack = Colors.black;
 Color kBackground = Colors.grey.shade100;
 Color kWhite = Colors.white;
 Color kGrey = Colors.grey.shade700;
+
+String kBaseUrl = 'http://siao.webcifra.com.br';
