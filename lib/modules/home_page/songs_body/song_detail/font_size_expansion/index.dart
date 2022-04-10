@@ -22,10 +22,12 @@ class FontSizeExpansionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       leading: const Icon(Icons.font_download_rounded),
-      title: Text(
+      title: const Text(
         'Tamanho da fonte',
         style: TextStyle(
-            fontSize: 15.0, color: kBlack, fontWeight: FontWeight.w500),
+          fontSize: 15.0,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       children: [
         SizedBox(

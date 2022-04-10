@@ -49,26 +49,11 @@ class ToneExpansionWidget extends StatelessWidget {
       leading: const Icon(
         Icons.music_note_rounded,
       ),
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Tom: ',
-              style: TextStyle(
-                color: kBlack,
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            TextSpan(
-              text: tone,
-              style: const TextStyle(
-                color: kSecondaryColor,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+      title: Text(
+        'Tom: ' + tone,
+        style: const TextStyle(
+          fontSize: 15.0,
+          fontWeight: FontWeight.w500,
         ),
       ),
       children: [

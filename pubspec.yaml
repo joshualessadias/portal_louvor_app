@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.4
   flutter_chord: ^0.1.0
   chord_transposer: ^0.0.2
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
