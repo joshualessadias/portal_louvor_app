@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 import 'package:portal_louvor_app/model/audio_file.dart';
 import 'package:portal_louvor_app/model/song.dart';
-import 'package:portal_louvor_app/utils/duration.dart';
+import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/audio_player.dart/index.dart';
 import 'audio_expansion/index.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:chord_transposer/chord_transposer.dart';
@@ -97,20 +95,19 @@ class _SongDetailPageState extends State<SongDetailPage> {
   late Song _songToShow;
   late double _fontSize;
   late double _audioPlayerYPosition;
+  late bool _isSearchingFile;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final transposer = ChordTransposer();
   final _playerHeight = 105.0;
 
   var _isPlayerOpened = false;
-  var _isPlaying = false;
-  var _audioPosition = const Duration();
   var _audioTotalDuration = const Duration();
   var _audioTitle = '';
 
   var _audioPlayerToPlay = AudioPlayer();
 
-  void _getAudioInfo() async {
+  void _getAudioInfo() {
     _audioPlayerList.clear();
 
     for (var fileResponse in _mockAudioFileResponse) {
@@ -121,25 +118,25 @@ class _SongDetailPageState extends State<SongDetailPage> {
         AudioPlayer audioPlayer = AudioPlayer();
         var audioPlayerId = audioPlayer.playerId;
 
-        var result = await audioPlayer.setUrl(url);
+        audioPlayer.setUrl(url).then((res) {
+          if (res == 1) {
+            _audioPlayerList.add(audioPlayer);
 
-        if (result == 1) {
-          _audioPlayerList.add(audioPlayer);
-
-          _audioPlayerList.last.onDurationChanged.listen((duration) {
-            _mockAudioFileList.add(AudioFile(
-              audioPlayerId,
-              fileResponse.description,
-              fileResponse.mp3,
-              duration,
-            ));
-          });
-        } else {
-          var description = fileResponse.description;
-          SnackBarUtils.myShowSnackBar(
-              context, 'Ocorreu um erro ao baixar áudio "$description"');
-          return;
-        }
+            _audioPlayerList.last.onDurationChanged.listen((duration) {
+              _mockAudioFileList.add(AudioFile(
+                audioPlayerId,
+                fileResponse.description,
+                fileResponse.mp3,
+                duration,
+              ));
+            });
+          } else {
+            var description = fileResponse.description;
+            SnackBarUtils.myShowSnackBar(
+                context, 'Ocorreu um erro ao baixar áudio "$description"');
+            return;
+          }
+        });
       } else {
         SnackBarUtils.myShowSnackBar(context, 'Áudio não encontrado');
         return;
@@ -202,46 +199,6 @@ class _SongDetailPageState extends State<SongDetailPage> {
     });
   }
 
-  void _playAudio(AudioPlayer audioPlayer) {
-    log('play');
-    audioPlayer.resume();
-
-    setState(() {
-      _isPlaying = true;
-    });
-  }
-
-  void _pauseAudio(AudioPlayer audioPlayer) {
-    log('pause');
-    audioPlayer.pause();
-
-    setState(() {
-      _isPlaying = false;
-    });
-  }
-
-  void _playPauseAudio(AudioPlayer audioPlayer) {
-    log('play/pause');
-    if (_isPlaying) {
-      _pauseAudio(audioPlayer);
-    } else {
-      _playAudio(audioPlayer);
-    }
-
-    audioPlayer.onAudioPositionChanged.listen((Duration newPosition) {
-      setState(() {
-        _audioPosition = newPosition;
-      });
-    });
-
-    audioPlayer.onPlayerCompletion.listen((event) {
-      setState(() {
-        audioPlayer.stop();
-        _isPlaying = false;
-      });
-    });
-  }
-
   AudioFile _getAudioFromPlayer(AudioPlayer _audioPlayerToPlay) {
     var audioFileToReturn = _mockAudioFileList.first;
 
@@ -283,109 +240,11 @@ class _SongDetailPageState extends State<SongDetailPage> {
     );
   }
 
-  AnimatedContainer _buildAudioPlayer() {
-    return AnimatedContainer(
-      duration: const Duration(seconds: 1),
-      curve: Curves.fastOutSlowIn,
-      transform: Matrix4.translationValues(0, _audioPlayerYPosition, 0),
-      height: _playerHeight,
-      decoration: const BoxDecoration(
-        color: kSecondaryColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15.0),
-          topRight: Radius.circular(15.0),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  _audioTitle,
-                  style: TextStyle(
-                      color: kWhite, fontSize: 15, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      setState(() {
-                        _isPlaying = false;
-                        _audioPlayerYPosition = _playerHeight + 1.0;
-                        _isPlayerOpened = false;
-                        _audioPlayerToPlay.stop();
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.close,
-                    ),
-                    iconSize: 20,
-                    color: kWhite,
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    disabledColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                  ),
-                  iconSize: 45,
-                  color: kWhite,
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  disabledColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: () {
-                    _playPauseAudio(_audioPlayerToPlay);
-                  },
-                ),
-                Text(
-                  DurationUtils.toFormattedString(_audioPosition),
-                  style: TextStyle(color: kWhite),
-                ),
-                Expanded(
-                  child: Slider.adaptive(
-                    min: 0.0,
-                    value: _audioPosition.inSeconds.toDouble(),
-                    max: _audioTotalDuration.inSeconds.toDouble(),
-                    onChanged: (double newValue) {
-                      setState(() {
-                        _audioPlayerToPlay
-                            .seek(Duration(seconds: newValue.toInt()));
-                      });
-                    },
-                    activeColor: kWhite,
-                    inactiveColor: kWhite.withOpacity(0.3),
-                  ),
-                ),
-                Text(
-                  DurationUtils.toFormattedString(_audioTotalDuration),
-                  style: TextStyle(color: kWhite),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  void _closeAudioPlayer() {
+    setState(() {
+      _audioPlayerYPosition = _playerHeight + 1.0;
+      _isPlayerOpened = false;
+    });
   }
 
   Widget _buildBody() {
@@ -413,7 +272,14 @@ class _SongDetailPageState extends State<SongDetailPage> {
             widgetPadding: 47,
           ),
         ),
-        _buildAudioPlayer(),
+        MyAudioPlayer(
+          audioPlayer: _audioPlayerToPlay,
+          audioPlayerYPosition: _audioPlayerYPosition,
+          audioTitle: _audioTitle,
+          audioTotalDuration: _audioTotalDuration,
+          playerHeight: _playerHeight,
+          closeAudioPlayer: _closeAudioPlayer,
+        ),
       ],
     );
   }
@@ -422,16 +288,18 @@ class _SongDetailPageState extends State<SongDetailPage> {
     Navigator.pop(context);
 
     AudioPlayer.players.forEach((audioPlayerId, audioPlayer) {
+      audioPlayer.stop();
+
       if (audioPlayerId == fileAudioPlayerId) {
         var audioFileToPlay = _getAudioFromPlayer(audioPlayer);
-
-        _playPauseAudio(audioPlayer);
 
         setState(() {
           _audioPlayerToPlay = audioPlayer;
           _audioTitle = audioFileToPlay.description;
           _audioTotalDuration = audioFileToPlay.duration;
         });
+
+        audioPlayer.resume();
       }
     });
 
@@ -488,6 +356,8 @@ class _SongDetailPageState extends State<SongDetailPage> {
           ),
           AudioExpansionWidget(
             files: _mockAudioFileList,
+            isSearchingFile:
+                _isSearchingFile, //TODO: arrumar um jeito de avisar a lista de audios que tem audio sendo procurado
             onAudioTap: (fileAudioPlayerId) {
               _onAudioTileTap(fileAudioPlayerId);
             },
@@ -511,6 +381,7 @@ class _SongDetailPageState extends State<SongDetailPage> {
     _songToShow = widget._originalSong;
     _fontSize = 16.0;
     _audioPlayerYPosition = _playerHeight + 1.0;
+    _isSearchingFile = false;
     _getAudioInfo();
     super.initState();
   }

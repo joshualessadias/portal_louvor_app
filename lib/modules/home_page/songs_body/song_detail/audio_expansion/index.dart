@@ -8,23 +8,19 @@ class AudioExpansionWidget extends StatelessWidget {
     Key? key,
     required this.onAudioTap,
     required this.files,
+    required this.isSearchingFile,
   }) : super(key: key);
 
   final StringToVoidFunc onAudioTap;
   final List<AudioFile> files;
+  final bool isSearchingFile;
 
-  List<ListTile> _getChildren() {
-    var children = <ListTile>[];
-
-    for (var file in files) {
-      children.add(_buildAudioTile(file));
-    }
-
-    if (children.isEmpty) {
-      children.add(_emptyTile());
-    }
-
-    return children;
+  ListTile _searchingTile() {
+    return ListTile(
+      leading: const Icon(Icons.error_rounded),
+      title: const Text('Procurando áudios...'),
+      onTap: () {},
+    );
   }
 
   ListTile _emptyTile() {
@@ -44,6 +40,24 @@ class AudioExpansionWidget extends StatelessWidget {
         onAudioTap(file.id);
       },
     );
+  }
+
+  List<ListTile> _getChildren() {
+    var children = <ListTile>[];
+
+    if (isSearchingFile) {
+      children.add(_searchingTile());
+    } else {
+      for (var file in files) {
+        children.add(_buildAudioTile(file));
+      }
+
+      if (children.isEmpty) {
+        children.add(_emptyTile());
+      }
+    }
+
+    return children;
   }
 
   @override
