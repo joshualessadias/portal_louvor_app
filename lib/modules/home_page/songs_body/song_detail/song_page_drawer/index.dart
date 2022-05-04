@@ -32,24 +32,24 @@ class _SongPageDrawerState extends State<SongPageDrawer> {
       audioPlayer.stop();
 
       if (audioPlayerId == fileAudioPlayerId) {
-        var audioFileToPlay = _getAudioFromPlayer(audioPlayer);
+        // var audioFileToPlay = _getAudioFromPlayer(audioPlayer);
 
         setState(() {
-          _audioPlayerToPlay = audioPlayer;
-          _audioTitle = audioFileToPlay.description;
-          _audioTotalDuration = audioFileToPlay.duration;
+          // _audioPlayerToPlay = audioPlayer;
+          // _audioTitle = audioFileToPlay.description;
+          // _audioTotalDuration = audioFileToPlay.duration;
         });
 
         audioPlayer.resume();
       }
     });
 
-    if (!_isPlayerOpened) {
-      setState(() {
-        _audioPlayerYPosition = 0;
-        _isPlayerOpened = true;
-      });
-    }
+    // if (!_isPlayerOpened) {
+    //   setState(() {
+    //     _audioPlayerYPosition = 0;
+    //     _isPlayerOpened = true;
+    //   });
+    // }
   }
 
   @override
@@ -61,31 +61,31 @@ class _SongPageDrawerState extends State<SongPageDrawer> {
           ToneExpansionWidget(
             tone: widget.song.tone,
             onToneDown: () {
-              _handleOnToneDown();
+              // _handleOnToneDown();
             },
             onToneUp: () {
-              _handleOnToneUp();
+              // _handleOnToneUp();
             },
             onToneRestore: () {
-              _handleOnToneRestore();
+              // _handleOnToneRestore();
             },
             onChangeTone: (newTone) {
-              _handleOnChangeTone(newTone);
+              // _handleOnChangeTone(newTone);
             },
           ),
           FontSizeExpansionWidget(
             onIncreaseFontSize: () {
               if (widget.fontSize < 30.0) {
-                _incrementFontSize();
+                // _incrementFontSize();
               }
             },
             onDecreaseFontSize: () {
               if (widget.fontSize > 6.0) {
-                _decrementFontSize();
+                // _decrementFontSize();
               }
             },
             onRestoreFontSize: () {
-              _restoreFontSize();
+              // _restoreFontSize();
             },
           ),
           AudioExpansionWidget(
