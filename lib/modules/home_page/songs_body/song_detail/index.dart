@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portal_louvor_app/components/constants.dart';
+import 'package:portal_louvor_app/enums/audio_file_enum.dart';
 import 'package:portal_louvor_app/model/audio_file.dart';
 import 'package:portal_louvor_app/model/song.dart';
 import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/audio_player.dart/index.dart';
+import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/blocs/audio_bloc.dart';
+import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/song_page_drawer/index.dart';
 import 'audio_expansion/index.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:chord_transposer/chord_transposer.dart';
@@ -22,59 +28,59 @@ class SongDetailPage extends StatefulWidget {
 }
 
 class _SongDetailPageState extends State<SongDetailPage> {
-//   final Song _mockOriginalSong = Song(
-//     id: 0,
-//     title: 'VIVO EM NÓS',
-//     authorId: 1,
-//     descriptionAuthor: 'DIANTE DO TRONO',
-//     tone: 'G',
-//     lyrics: '''
-// [C     ][G     ][Em7     ][C]
-// [G]Teu grande amor, Todos vão ca[Em7]ntar
-// Todos vão cant[D]ar, [G]Vieste aqui
-// Esperança [Em7]dar, Forças renov[D]ar
+  final Song _mockOriginalSong = Song(
+    id: 0,
+    title: 'VIVO EM NÓS',
+    authorId: 1,
+    descriptionAuthor: 'DIANTE DO TRONO',
+    tone: 'G',
+    lyrics: '''
+[C     ][G     ][Em7     ][C]
+[G]Teu grande amor, Todos vão ca[Em7]ntar
+Todos vão cant[D]ar, [G]Vieste aqui
+Esperança [Em7]dar, Forças renov[D]ar
 
-// Só Tu, Senh[C]or, És O [Em7]caminho[D]
-// Só Tu, Senh[C]or, És O [Em7]caminho[D]
+Só Tu, Senh[C]or, És O [Em7]caminho[D]
+Só Tu, Senh[C]or, És O [Em7]caminho[D]
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome [C]vamos[Em7] exalt[D]ar
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome [C]vamos[Em7] exalt[D]ar
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós
 
-// [C     ][G     ][Em7     ][C]
-// [G]Brilhas mais que o Sol
-// Glorioso [Em7]És, Glorioso [D]És
-// Senhor e [G]Rei, Tudo vem de Ti[Em7]
-// És nova vida em [D]mim
+[C     ][G     ][Em7     ][C]
+[G]Brilhas mais que o Sol
+Glorioso [Em7]És, Glorioso [D]És
+Senhor e [G]Rei, Tudo vem de Ti[Em7]
+És nova vida em [D]mim
 
-// Em tudo [C]És e[Em7]xalta[D]do
-// Em tudo [C]És [Em7]exalta[D]do
+Em tudo [C]És e[Em7]xalta[D]do
+Em tudo [C]És [Em7]exalta[D]do
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome v[C]amos[Em7] exalt[D]ar
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome v[C]amos[Em7] exalt[D]ar
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós
 
-// [C     ][G     ][Em7     ][D]
-// Vie[C]ste o inimigo p[G]isar
-// E nos li[Em7]vrar, e nos livr[D]ar
-// O Am[C]or venceu a morte na [G]cruz
-// És Venced[Em7]or, és Venced[D]or!
+[C     ][G     ][Em7     ][D]
+Vie[C]ste o inimigo p[G]isar
+E nos li[Em7]vrar, e nos livr[D]ar
+O Am[C]or venceu a morte na [G]cruz
+És Venced[Em7]or, és Venced[D]or!
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome v[C]amos [Em7]exalta[D]r
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós  2X
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome v[C]amos [Em7]exalta[D]r
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós  2X
 
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós [C]
-// ''',
-//     mp3: '',
-//   );
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós [C]
+''',
+    mp3: '',
+  );
   final List<AudioFileResponse> _mockAudioFileResponse = [
     AudioFileResponse(
       1,
@@ -89,59 +95,25 @@ class _SongDetailPageState extends State<SongDetailPage> {
       '/files/mp3/13/a3f8e5da50c25f89e4228d792e93d3b1.mp3',
     ),
   ];
-  final List<AudioFile> _mockAudioFileList = [];
+  final List<AudioFile> _audioFileList = [];
   final List<AudioPlayer> _audioPlayerList = [];
-
-  late Song _songToShow;
-  late double _fontSize;
-  late double _audioPlayerYPosition;
-  late bool _isSearchingFile;
-
+  final double _playerHeight = 105.0;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final transposer = ChordTransposer();
-  final _playerHeight = 105.0;
-
-  var _isPlayerOpened = false;
-  var _audioTotalDuration = const Duration();
-  var _audioTitle = '';
-
-  var _audioPlayerToPlay = AudioPlayer();
+  double _fontSize = 16.0;
+  AudioFileState _audioFileState = AudioFileState.searching;
+  bool _isPlayerOpened = false;
+  Duration _audioTotalDuration = const Duration();
+  String _audioTitle = '';
+  AudioPlayer _audioPlayerToPlay = AudioPlayer();
+  late double _audioPlayerYPosition;
+  late Song _songToShow;
+  late final AudioBloc audioBloc;
 
   void _getAudioInfo() {
     _audioPlayerList.clear();
 
-    for (var fileResponse in _mockAudioFileResponse) {
-      var mp3Path = fileResponse.mp3;
-
-      if (mp3Path.isNotEmpty) {
-        var url = '$kBaseUrl$mp3Path';
-        AudioPlayer audioPlayer = AudioPlayer();
-        var audioPlayerId = audioPlayer.playerId;
-
-        audioPlayer.setUrl(url).then((res) {
-          if (res == 1) {
-            _audioPlayerList.add(audioPlayer);
-
-            _audioPlayerList.last.onDurationChanged.listen((duration) {
-              _mockAudioFileList.add(AudioFile(
-                audioPlayerId,
-                fileResponse.description,
-                fileResponse.mp3,
-                duration,
-              ));
-            });
-          } else {
-            var description = fileResponse.description;
-            SnackBarUtils.myShowSnackBar(
-                context, 'Ocorreu um erro ao baixar áudio "$description"');
-            return;
-          }
-        });
-      } else {
-        SnackBarUtils.myShowSnackBar(context, 'Áudio não encontrado');
-        return;
-      }
-    }
+    audioBloc.loadAudios(_mockAudioFileResponse);
   }
 
   void _handleOnToneDown() {
@@ -200,9 +172,9 @@ class _SongDetailPageState extends State<SongDetailPage> {
   }
 
   AudioFile _getAudioFromPlayer(AudioPlayer _audioPlayerToPlay) {
-    var audioFileToReturn = _mockAudioFileList.first;
+    var audioFileToReturn = _audioFileList.first;
 
-    for (var audioFile in _mockAudioFileList) {
+    for (var audioFile in _audioFileList) {
       if (audioFile.id == _audioPlayerToPlay.playerId) {
         audioFileToReturn = audioFile;
       }
@@ -284,106 +256,19 @@ class _SongDetailPageState extends State<SongDetailPage> {
     );
   }
 
-  void _onAudioTileTap(String fileAudioPlayerId) {
-    Navigator.pop(context);
-
-    AudioPlayer.players.forEach((audioPlayerId, audioPlayer) {
-      audioPlayer.stop();
-
-      if (audioPlayerId == fileAudioPlayerId) {
-        var audioFileToPlay = _getAudioFromPlayer(audioPlayer);
-
-        setState(() {
-          _audioPlayerToPlay = audioPlayer;
-          _audioTitle = audioFileToPlay.description;
-          _audioTotalDuration = audioFileToPlay.duration;
-        });
-
-        audioPlayer.resume();
-      }
-    });
-
-    if (!_isPlayerOpened) {
-      setState(() {
-        _audioPlayerYPosition = 0;
-        _isPlayerOpened = true;
-      });
-    }
-  }
-
-  Drawer _buildDrawer() {
-    double _staturBarHeight = MediaQuery.of(context).padding.top;
-
-    return Drawer(
-      child: Column(
-        children: [
-          SizedBox(height: _staturBarHeight),
-          ToneExpansionWidget(
-            tone: _songToShow.tone,
-            onToneDown: () {
-              _handleOnToneDown();
-            },
-            onToneUp: () {
-              _handleOnToneUp();
-            },
-            onToneRestore: () {
-              _handleOnToneRestore();
-            },
-            onChangeTone: (newTone) {
-              _handleOnChangeTone(newTone);
-            },
-          ),
-          FontSizeExpansionWidget(
-            onIncreaseFontSize: () {
-              if (_fontSize < 30.0) {
-                setState(() {
-                  _fontSize++;
-                });
-              }
-            },
-            onDecreaseFontSize: () {
-              if (_fontSize > 6.0) {
-                setState(() {
-                  _fontSize--;
-                });
-              }
-            },
-            onRestoreFontSize: () {
-              setState(() {
-                _fontSize = 16.0;
-              });
-            },
-          ),
-          AudioExpansionWidget(
-            files: _mockAudioFileList,
-            isSearchingFile:
-                _isSearchingFile, //TODO: arrumar um jeito de avisar a lista de audios que tem audio sendo procurado
-            onAudioTap: (fileAudioPlayerId) {
-              _onAudioTileTap(fileAudioPlayerId);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   void dispose() {
-    for (var audioPlayer in _audioPlayerList) {
-      audioPlayer.dispose();
-    }
-    _audioPlayerList.clear();
+    audioBloc.disposeAudioPlayer();
     super.dispose();
   }
 
   @override
-  initState() {
-    _songToShow = widget._originalSong;
-    _fontSize = 16.0;
-    _audioPlayerYPosition = _playerHeight + 1.0;
-    _isSearchingFile = false;
-    _getAudioInfo();
+  void initState() {
     super.initState();
+    audioBloc = BlocProvider.of<AudioBloc>(context);
+    _songToShow = _mockOriginalSong;
+    _audioPlayerYPosition = _playerHeight + 1.0;
+    _getAudioInfo();
   }
 
   @override
@@ -392,7 +277,12 @@ class _SongDetailPageState extends State<SongDetailPage> {
       key: _scaffoldKey,
       appBar: _buildAppBar(context),
       body: _buildBody(),
-      endDrawer: _buildDrawer(),
+      endDrawer: SongPageDrawer(
+        audioBloc: audioBloc,
+        fontSize: _fontSize,
+        song: _songToShow,
+        statusBarHeight: _playerHeight,
+      ),
       endDrawerEnableOpenDragGesture: false,
     );
   }

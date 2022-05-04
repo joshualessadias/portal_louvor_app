@@ -44,6 +44,12 @@ class _MyAudioPlayerState extends State<MyAudioPlayer> {
           _isPlaying = false;
         });
       });
+
+      if (audioPlayer.state == PlayerState.PLAYING) {
+        setState(() {
+          _isPlaying = true;
+        });
+      }
     }
   }
 
