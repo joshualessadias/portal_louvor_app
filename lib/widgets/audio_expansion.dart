@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/audio_file.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/tone_expansion/index.dart';
+import 'package:portal_louvor_app/widgets/tone_expansion.dart';
 import 'package:portal_louvor_app/utils/duration.dart';
 
 class AudioExpansionWidget extends StatelessWidget {

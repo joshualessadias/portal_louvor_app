@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/song.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/index.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/songs_search/index.dart';
+import 'package:portal_louvor_app/screens/song_detail_screen.dart';
+import 'package:portal_louvor_app/screens/song_search_screen.dart';
 import 'package:portal_louvor_app/components/mock_songs.dart';
 
-class SongsBody extends StatelessWidget {
-  SongsBody({Key? key, this.songList}) : super(key: key);
+class SongsList extends StatelessWidget {
+  SongsList({Key? key, this.songList}) : super(key: key);
 
   final List<Song>? songList;
 
   final List<Song> mockSongs = kMockSongs;
 
   void _onClickSearch(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const SongSearchPage()));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const SongSearchScreen()));
   }
 
   void _onClickCard(BuildContext context, int songIndex) {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SongDetailPage(
+        builder: (context) => SongDetailScreen(
             songList != null ? songList![songIndex] : mockSongs[songIndex])));
   }
 
@@ -104,7 +104,7 @@ class SongsBody extends StatelessWidget {
             ),
           ),
         ),
-        (songList == null
+        (songList != null
             ? Align(
                 alignment: FractionalOffset.bottomRight,
                 child: Padding(

@@ -2,79 +2,79 @@ import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 import 'package:portal_louvor_app/model/audio_file.dart';
 import 'package:portal_louvor_app/model/song.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/song_detail/audio_player.dart/index.dart';
-import 'audio_expansion/index.dart';
+import 'package:portal_louvor_app/widgets/audio_player.dart';
+import '../widgets/audio_expansion.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 import 'package:chord_transposer/chord_transposer.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:portal_louvor_app/utils/snackbar.dart';
 
-import 'font_size_expansion/index.dart';
-import 'tone_expansion/index.dart';
+import '../widgets/font_size_expansion.dart';
+import '../widgets/tone_expansion.dart';
 
-class SongDetailPage extends StatefulWidget {
-  const SongDetailPage(this._originalSong, {Key? key}) : super(key: key);
+class SongDetailScreen extends StatefulWidget {
+  const SongDetailScreen(this._originalSong, {Key? key}) : super(key: key);
 
   final Song _originalSong;
 
   @override
-  State<SongDetailPage> createState() => _SongDetailPageState();
+  State<SongDetailScreen> createState() => _SongDetailScreenState();
 }
 
-class _SongDetailPageState extends State<SongDetailPage> {
-//   final Song _mockOriginalSong = Song(
-//     id: 0,
-//     title: 'VIVO EM NÓS',
-//     authorId: 1,
-//     descriptionAuthor: 'DIANTE DO TRONO',
-//     tone: 'G',
-//     lyrics: '''
-// [C     ][G     ][Em7     ][C]
-// [G]Teu grande amor, Todos vão ca[Em7]ntar
-// Todos vão cant[D]ar, [G]Vieste aqui
-// Esperança [Em7]dar, Forças renov[D]ar
+class _SongDetailScreenState extends State<SongDetailScreen> {
+  final Song _mockOriginalSong = Song(
+    id: 0,
+    title: 'VIVO EM NÓS',
+    authorId: 1,
+    descriptionAuthor: 'DIANTE DO TRONO',
+    tone: 'G',
+    lyrics: '''
+[C     ][G     ][Em7     ][C]
+[G]Teu grande amor, Todos vão ca[Em7]ntar
+Todos vão cant[D]ar, [G]Vieste aqui
+Esperança [Em7]dar, Forças renov[D]ar
 
-// Só Tu, Senh[C]or, És O [Em7]caminho[D]
-// Só Tu, Senh[C]or, És O [Em7]caminho[D]
+Só Tu, Senh[C]or, És O [Em7]caminho[D]
+Só Tu, Senh[C]or, És O [Em7]caminho[D]
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome [C]vamos[Em7] exalt[D]ar
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome [C]vamos[Em7] exalt[D]ar
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós
 
-// [C     ][G     ][Em7     ][C]
-// [G]Brilhas mais que o Sol
-// Glorioso [Em7]És, Glorioso [D]És
-// Senhor e [G]Rei, Tudo vem de Ti[Em7]
-// És nova vida em [D]mim
+[C     ][G     ][Em7     ][C]
+[G]Brilhas mais que o Sol
+Glorioso [Em7]És, Glorioso [D]És
+Senhor e [G]Rei, Tudo vem de Ti[Em7]
+És nova vida em [D]mim
 
-// Em tudo [C]És e[Em7]xalta[D]do
-// Em tudo [C]És [Em7]exalta[D]do
+Em tudo [C]És e[Em7]xalta[D]do
+Em tudo [C]És [Em7]exalta[D]do
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome v[C]amos[Em7] exalt[D]ar
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome v[C]amos[Em7] exalt[D]ar
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós
 
-// [C     ][G     ][Em7     ][D]
-// Vie[C]ste o inimigo p[G]isar
-// E nos li[Em7]vrar, e nos livr[D]ar
-// O Am[C]or venceu a morte na [G]cruz
-// És Venced[Em7]or, és Venced[D]or!
+[C     ][G     ][Em7     ][D]
+Vie[C]ste o inimigo p[G]isar
+E nos li[Em7]vrar, e nos livr[D]ar
+O Am[C]or venceu a morte na [G]cruz
+És Venced[Em7]or, és Venced[D]or!
 
-// Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
-// És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
-// Teu [G]nome v[C]amos [Em7]exalta[D]r
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós  2X
+Tu [C]és Jesu[G]s, o S[Em7]alvador[D]
+És [C]Rei, S[G]enhor, [Em7]És Venc[D]edor
+Teu [G]nome v[C]amos [Em7]exalta[D]r
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós  2X
 
-// [G]Cristo, [C]Cristo
-// [Em7]Vivo em [D]nós [C]
-// ''',
-//     mp3: '',
-//   );
+[G]Cristo, [C]Cristo
+[Em7]Vivo em [D]nós [C]
+''',
+    mp3: '',
+  );
   final List<AudioFileResponse> _mockAudioFileResponse = [
     AudioFileResponse(
       1,
@@ -173,7 +173,7 @@ class _SongDetailPageState extends State<SongDetailPage> {
     String _newTone = transposer.chordToKey(
         chord: _songToShow.tone,
         fromKey: _songToShow.tone,
-        toKey: widget._originalSong.tone);
+        toKey: _mockOriginalSong.tone);
     if (_newTone == 'Gb') {
       _newTone = 'F#';
     }
@@ -220,7 +220,7 @@ class _SongDetailPageState extends State<SongDetailPage> {
         },
       ),
       title: Text(
-        widget._originalSong.title,
+        _mockOriginalSong.title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -378,7 +378,7 @@ class _SongDetailPageState extends State<SongDetailPage> {
 
   @override
   initState() {
-    _songToShow = widget._originalSong;
+    _songToShow = _mockOriginalSong;
     _fontSize = 16.0;
     _audioPlayerYPosition = _playerHeight + 1.0;
     _isSearchingFile = false;

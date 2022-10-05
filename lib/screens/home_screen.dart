@@ -5,18 +5,18 @@ import 'package:http/http.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 import 'package:portal_louvor_app/components/custom_tab_bar.dart';
 import 'package:portal_louvor_app/model/song.dart';
-import 'package:portal_louvor_app/modules/home_page/playlist_body/index.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
+import 'package:portal_louvor_app/widgets/playlist_list.dart';
+import 'package:portal_louvor_app/widgets/songs_list.dart';
 import 'package:portal_louvor_app/services/song_service.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage>
+class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin, RestorationMixin {
   late TabController _tabController;
 
@@ -168,8 +168,8 @@ class _HomePageState extends State<HomePage>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  PlaylistBody(),
-                  SongsBody(
+                  PlaylistList(),
+                  SongsList(
                     songList: songList,
                   ),
                 ],

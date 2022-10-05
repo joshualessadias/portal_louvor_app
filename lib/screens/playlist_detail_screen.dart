@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/model/playlist.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
+import 'package:portal_louvor_app/widgets/songs_list.dart';
 
-class PlaylistDetailPage extends StatelessWidget {
-  const PlaylistDetailPage(this.playlist, {Key? key}) : super(key: key);
+class PlaylistDetailScreen extends StatelessWidget {
+  const PlaylistDetailScreen(this.playlist, {Key? key}) : super(key: key);
 
   final Playlist playlist;
 
@@ -29,7 +29,7 @@ class PlaylistDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SongsBody(songList: playlist.songs),
+      body: SongsList(songList: playlist.songs),
     );
   }
 }

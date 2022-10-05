@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/mock_songs.dart';
 import 'package:portal_louvor_app/model/playlist.dart';
-import 'package:portal_louvor_app/modules/home_page/playlist_body/playlist_detail/index.dart';
+import 'package:portal_louvor_app/screens/playlist_detail_screen.dart';
 
-class PlaylistBody extends StatelessWidget {
-  PlaylistBody({Key? key}) : super(key: key);
+class PlaylistList extends StatelessWidget {
+  PlaylistList({Key? key}) : super(key: key);
 
   final List<Playlist> mockPlaylists = [
     Playlist(0, 'Culto Domingo Matutino - 13/02/2022', kMockSongs),
@@ -14,7 +14,7 @@ class PlaylistBody extends StatelessWidget {
   void _onClickCard(BuildContext context, int playlistIndex) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            PlaylistDetailPage(mockPlaylists[playlistIndex])));
+            PlaylistDetailScreen(mockPlaylists[playlistIndex])));
   }
 
   @override

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 import 'package:portal_louvor_app/components/mock_songs.dart';
 import 'package:portal_louvor_app/model/song.dart';
-import 'package:portal_louvor_app/modules/home_page/songs_body/index.dart';
+import 'package:portal_louvor_app/widgets/songs_list.dart';
 
-class SongSearchPage extends StatefulWidget {
-  const SongSearchPage({Key? key}) : super(key: key);
+class SongSearchScreen extends StatefulWidget {
+  const SongSearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<SongSearchPage> createState() => _SongSearchPageState();
+  State<SongSearchScreen> createState() => _SongSearchScreenState();
 }
 
 TextEditingController editingController = TextEditingController();
 
-class _SongSearchPageState extends State<SongSearchPage> {
+class _SongSearchScreenState extends State<SongSearchScreen> {
   final List<Song> _mockSongs = kMockSongs;
 
   final List<Song> _songsToShow = <Song>[];
@@ -50,7 +50,7 @@ class _SongSearchPageState extends State<SongSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context, editingController),
-      body: SongsBody(songList: _songsToShow),
+      body: SongsList(songList: _songsToShow),
     );
   }
 

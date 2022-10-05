@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 
-import 'modules/login_page/index.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             onError: Colors.white,
             brightness: Brightness.light,
           )),
-      home: const LoginPage(),
+      home: const LoginScreen(),
     );
   }
 }

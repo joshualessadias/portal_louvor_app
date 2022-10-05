@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:portal_louvor_app/components/constants.dart';
 
-import '../../components/my_scroll_behavior.dart';
-import '../home_page/index.dart';
+import '../components/my_scroll_behavior.dart';
+import 'home_screen.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   void _onClickAcessar(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const HomePage()));
+        .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override
